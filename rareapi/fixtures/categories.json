@@ -1,0 +1,23 @@
+[
+  {
+      "model": "rareapi.categories",
+      "pk": 1,
+      "fields": {
+          "label": "movies"
+      }
+  },
+  {
+      "model": "rareapi.categories",
+      "pk": 2,
+      "fields": {
+          "label": "books"
+      }
+  },
+  {
+      "model": "rareapi.categories",
+      "pk": 3,
+      "fields": {
+          "label": "music"
+      }
+  }
+]
