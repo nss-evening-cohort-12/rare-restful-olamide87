@@ -82,6 +82,24 @@ class CategoriesViewset(ViewSet):
         # server is not sending back any data in the response
         return Response({}, status=status.HTTP_204_NO_CONTENT)
        
+    def destroy(self, request, pk=None):
+        """Handle DELETE requests for a single category
+
+        Returns:
+            Response -- 200, 404, or 500 status code
+        """
+        try:
+            category = Categories.objects.get(pk=pk)
+            category.delete()
+
+            return Response({}, status=status.HTTP_204_NO_CONTENT)
+
+        except category.DoesNotExist as ex:
+            return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
+
+        except Exception as ex:
+            return Response({'message': ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 
     def list(self, request):
         """Handle GET requests to get all categories
