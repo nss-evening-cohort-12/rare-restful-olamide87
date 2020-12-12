@@ -18,8 +18,8 @@ class CategoriesViewset(ViewSet):
             Response -- JSON serialized category instance
         """
 
-        # Uses the token passed in the `Authorization` header
-        categories = Categories.objects.get(user=request.auth.user)
+        # # Uses the token passed in the `Authorization` header
+        # categories = Categories.objects.get(user=request.auth.user)
 
         # Create a new Python instance of the Game class
         # and set its properties from what was sent in the
@@ -29,10 +29,10 @@ class CategoriesViewset(ViewSet):
        
 
         # Use the Django ORM to get the record from the database
-        # whose `id` is what the client passed as the
-        # `gameTypeId` in the body of the request.
-        category = Categories.objects.get(pk=request.data["categoryId"])
-        category.categories = category
+        # # whose `id` is what the client passed as the
+        # # `gameTypeId` in the body of the request.
+        # category = Categories.objects.get(pk=request.data["categoryId"])
+        # category.categories = category
 
         # Try to save the new game to the database, then
         # serialize the game instance as JSON, and send the
