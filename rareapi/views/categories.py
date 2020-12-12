@@ -24,7 +24,7 @@ class CategoriesViewset(ViewSet):
         # Create a new Python instance of the Game class
         # and set its properties from what was sent in the
         # body of the request from the client.
-        category = Category()
+        category = Categories()
         category.label = request.data["label"]
        
 
@@ -39,7 +39,7 @@ class CategoriesViewset(ViewSet):
         # JSON as a response to the client request
         try:
             category.save()
-            serializer = CategorySerializer(category, context={'request': request})
+            serializer = CategoriesSerializer(category, context={'request': request})
             return Response(serializer.data)
 
         # If anything went wrong, catch the exception and
@@ -60,6 +60,28 @@ class CategoriesViewset(ViewSet):
             return Response(serializer.data)
         except Exception as ex:
             return HttpResponseServerError(ex)
+
+    def update(self, request, pk=None):
+        """Handle PUT requests for a category
+
+        Returns:
+            Response -- Empty body with 204 status code
+        """
+        # gamer = Gamer.objects.get(user=request.auth.user)
+
+        # Do mostly the same thing as POST, but instead of
+        # creating a new instance of Game, get the game record
+        # from the database whose primary key is `pk`
+        category = Categories.objects.get(pk=pk)
+        category.label = request.data["label"]
+      
+
+        category.save()
+
+        # 204 status code means everything worked but the
+        # server is not sending back any data in the response
+        return Response({}, status=status.HTTP_204_NO_CONTENT)
+       
 
     def list(self, request):
         """Handle GET requests to get all categories
