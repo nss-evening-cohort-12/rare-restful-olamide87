@@ -1,0 +1,42 @@
+[
+  {
+      "model": "rareapi.posts",
+      "pk": 1,
+      "fields": {
+          "category_id": 2,
+          "title": "fine wine",
+          "publication_date": "2020-01-11",
+          "image_url": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/delicious-red-wine-royalty-free-image-1585590768.jpg",
+          "content": "favorite wines",
+          "approved": true
+
+
+      }
+  },
+  {
+      "model": "rareapi.posts",
+      "pk": 2,
+      "fields": {
+        "category_id": 2,
+        "title": "fine cigars",
+        "publication_date": "2020-06-20",
+        "image_url": "https://oylacigars.com/wp-content/uploads/2020/01/HTS_9248-2OYLA.jpg",
+        "content": "favorite cigars",
+        "approved": true
+
+      }
+  },
+  {
+    "model": "rareapi.posts",
+    "pk": 3,
+    "fields": {
+      "category_id": 2,
+      "title": "cars",
+      "publication_date": "2020-01-15",
+      "image_url": "https://cdn.motor1.com/images/mgl/Yp07j/s1/tesla-pricing-lead.jpg",
+      "content": "favorite cars",
+      "approved": true
+
+  }
+}
+]
