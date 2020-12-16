@@ -5,10 +5,36 @@ from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
-from rareapi.models import Posts
+from rareapi.models import Posts, Categories
 
 class PostsViewset(ViewSet):
     """Level up posts"""
+
+    def create(self, request):
+        """Handle POST operations for events
+
+        Returns:
+            Response -- JSON serialized post instance
+        """
+      
+
+        post = Posts()
+        post.title = request.data["title"]
+        post.publication_date = request.data["publication_date"]
+        post.image_url = request.data["image_url"]
+        post.approved = request.data["approved"]
+        post.content = request.data["content"]
+        post.category = Categories.objects.get(pk=request.data["category_id"])
+
+
+      
+
+        try:
+            post.save()
+            serializer = PostSerializer(post, context={'request': request})
+            return Response(serializer.data)
+        except ValidationError as ex:
+            return Response({"reason": ex.message}, status=status.HTTP_400_BAD_REQUEST)    
 
     def retrieve(self, request, pk=None):
         """Handle GET requests for single post
@@ -46,12 +72,5 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
     """
     class Meta:
         model = Posts
-        # url = serializers.HyperlinkedIdentityField(
-        #     view_name='posts',
-        #     lookup_field='id',
-
-
-
-        # )
         fields = ('id', 'title', 'publication_date', 
         'image_url','content', 'approved' )
