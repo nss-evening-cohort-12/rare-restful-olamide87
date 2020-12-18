@@ -16,8 +16,6 @@ class PostsViewset(ViewSet):
         Returns:
             Response -- JSON serialized post instance
         """
-      
-
         post = Posts()
         post.title = request.data["title"]
         post.publication_date = request.data["publication_date"]
@@ -25,10 +23,6 @@ class PostsViewset(ViewSet):
         post.approved = request.data["approved"]
         post.content = request.data["content"]
         post.category = Categories.objects.get(pk=request.data["category_id"])
-
-
-      
-
         try:
             post.save()
             serializer = PostSerializer(post, context={'request': request})
@@ -48,6 +42,29 @@ class PostsViewset(ViewSet):
             return Response(serializer.data)
         except Exception as ex:
             return HttpResponseServerError(ex)
+
+    def update(self, request, pk=None):
+        """Handle PUT requests for an post
+
+        Returns:
+            Response -- Empty body with 204 status code
+        """
+
+        post = Posts.objects.get(pk=pk)
+        post.title = request.data["title"]
+        post.publication_date = request.data["publication_date"]
+        post.image_url = request.data["image_url"]
+        post.approved = request.data["approved"]
+        post.content = request.data["content"]
+        post.category = Categories.objects.get(pk=request.data["category_id"])
+    
+
+        # game = Game.objects.get(pk=request.data["gameId"])
+        # event.game = game
+        post.save()
+
+        return Response({}, status=status.HTTP_204_NO_CONTENT)
+        
 
     def list(self, request):
         """Handle GET requests to get all Posts
