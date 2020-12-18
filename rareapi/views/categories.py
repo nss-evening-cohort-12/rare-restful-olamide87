@@ -1,4 +1,4 @@
-"""View module for handling requests about game types"""
+"""View module for handling requests about categories"""
 from django.core.exceptions import ValidationError
 from rest_framework import status
 from django.http import HttpResponseServerError
