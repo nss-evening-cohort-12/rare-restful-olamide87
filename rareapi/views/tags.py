@@ -23,6 +23,22 @@ class TagsViewset(ViewSet):
         except Exception as ex:
             return HttpResponseServerError(ex)
 
+    def list(self, request):
+        """Handle GET requests to get all Tags
+
+        Returns:
+            Response -- JSON serialized list of Tags
+        """
+        tags = Tags.objects.all()
+
+        # Note the addtional `many=True` argument to the
+        # serializer. It's needed when you are serializing
+        # a list of objects instead of a single object.
+        serializer = TagsSerializer(
+            tags, many=True, context={'request': request})
+        return Response(serializer.data)
+        
+
 class TagsSerializer(serializers.ModelSerializer):
     """JSON serializer for tags
 
