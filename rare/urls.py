@@ -19,8 +19,8 @@ from django.urls import path
 from django.conf.urls import include
 from rest_framework import routers
 
-from rareapi.views import CategoriesViewset
-from rareapi.views import PostsViewset
+from rareapi.views import CategoriesViewset, PostsViewset
+
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'categories', CategoriesViewset, 'category')
