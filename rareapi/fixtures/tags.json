@@ -1,0 +1,23 @@
+[
+  {
+      "model": "rareapi.tags",
+      "pk": 1,
+      "fields": {
+          "label": "cool stuff"
+      }
+  },
+  {
+      "model": "rareapi.tags",
+      "pk": 2,
+      "fields": {
+          "label": "certified"
+      }
+  },
+  {
+      "model": "rareapi.tags",
+      "pk": 3,
+      "fields": {
+          "label": "thenew"
+      }
+  }
+]
