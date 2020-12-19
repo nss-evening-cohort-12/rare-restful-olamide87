@@ -8,7 +8,43 @@ from rareapi.models import Tags
 
 class TagsViewset(ViewSet):
     """rare restful Tags"""
+    
+    def create(self, request):
+        """Handle POST operations
 
+        Returns:
+            Response -- JSON serialized category instance
+        """
+
+        # # Uses the token passed in the `Authorization` header
+        # categories = Categories.objects.get(user=request.auth.user)
+
+        # Create a new Python instance of the Game class
+        # and set its properties from what was sent in the
+        # body of the request from the client.
+        tag = Tags()
+        tag.label = request.data["label"]
+       
+
+        # Use the Django ORM to get the record from the database
+        # # whose `id` is what the client passed as the
+        # # `gameTypeId` in the body of the request.
+        # category = Categories.objects.get(pk=request.data["categoryId"])
+        # category.categories = category
+
+        # Try to save the new game to the database, then
+        # serialize the game instance as JSON, and send the
+        # JSON as a response to the client request
+        try:
+            tag.save()
+            serializer = TagsSerializer(tag, context={'request': request})
+            return Response(serializer.data)
+
+        # If anything went wrong, catch the exception and
+        # send a response with a 400 status code to tell the
+        # client that something was wrong with its request data
+        except ValidationError as ex:
+            return Response({"reason": ex.message}, status=status.HTTP_400_BAD_REQUEST)
 
     def retrieve(self, request, pk=None):
         """Handle GET requests for single tag
