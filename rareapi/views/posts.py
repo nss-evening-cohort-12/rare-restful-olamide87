@@ -1,4 +1,5 @@
-"""View module for handling requests about game types"""
+"""View module for handling requests about posts"""
+from rareapi.views.postTags import PostTagsSerializer
 from django.core.exceptions import ValidationError
 from rest_framework import status
 from django.http import HttpResponseServerError
@@ -8,10 +9,10 @@ from rest_framework import serializers
 from rareapi.models import Posts, Categories
 
 class PostsViewset(ViewSet):
-    """Level up posts"""
+    """rareapi posts"""
 
     def create(self, request):
-        """Handle POST operations for events
+        """Handle POST operations for posts
 
         Returns:
             Response -- JSON serialized post instance
@@ -101,13 +102,14 @@ class PostsViewset(ViewSet):
 
         
 
-class PostSerializer(serializers.HyperlinkedModelSerializer):
+class PostSerializer(serializers.ModelSerializer):
     """JSON serializer for posts
 
     Arguments:
         serializers
     """
+    tagging = PostTagsSerializer(many=True)
     class Meta:
         model = Posts
         fields = ('id', 'title', 'publication_date', 
-        'image_url','content', 'approved' )
+        'image_url','content', 'approved', 'tagging' )

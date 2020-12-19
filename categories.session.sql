@@ -1,1 +1,1 @@
-SELECT * FROM rareapi_tags;
+SELECT * FROM rareapi_posts;
