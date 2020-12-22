@@ -38,7 +38,7 @@ class CommentsViewset(ViewSet):
             comments, many=True, context={'request': request})
         return Response(serializer.data)
 
-def create(self, request):
+    def create(self, request):
         """Handle POST operations
 
         Returns:
@@ -52,8 +52,11 @@ def create(self, request):
         # and set its properties from what was sent in the
         # body of the request from the client.
         comment = Comments()
-        comment.label = request.data["label"]
-       
+        # comment.posts = request.data["posts"]
+        comment.subject = request.data["subject"]
+        comment.created_on = request.data["created_on"]
+        comment.content = request.data["content"]
+        comment.posts = Posts.objects.get(pk=request.data["posts"])
 
         # Use the Django ORM to get the record from the database
         # # whose `id` is what the client passed as the
