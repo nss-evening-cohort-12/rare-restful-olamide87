@@ -1,0 +1,32 @@
+[
+  {
+      "model": "rareapi.comments",
+      "pk": 1,
+      "fields": {
+          "posts": 1,
+          "subject": "green",
+          "created_on": "2020-05-11",
+          "content": "neat"
+      }
+  },
+  {
+    "model": "rareapi.comments",
+    "pk": 2,
+    "fields": {
+        "posts": 1,
+        "subject": "blue",
+        "created_on": "2020-04-11",
+        "content": "awesome"
+    }
+},
+{
+  "model": "rareapi.comments",
+  "pk": 3,
+  "fields": {
+      "posts": 1,
+      "subject": "red",
+      "created_on": "2020-03-11",
+      "content": "so great"
+  }
+}
+]
