@@ -52,7 +52,6 @@ class CommentsViewset(ViewSet):
         # and set its properties from what was sent in the
         # body of the request from the client.
         comment = Comments()
-        # comment.posts = request.data["posts"]
         comment.subject = request.data["subject"]
         comment.created_on = request.data["created_on"]
         comment.content = request.data["content"]
@@ -76,7 +75,26 @@ class CommentsViewset(ViewSet):
         # send a response with a 400 status code to tell the
         # client that something was wrong with its request data
         except ValidationError as ex:
-            return Response({"reason": ex.message}, status=status.HTTP_400_BAD_REQUEST)        
+            return Response({"reason": ex.message}, status=status.HTTP_400_BAD_REQUEST)
+
+    def update(self, request, pk=None):
+        """Handle PUT requests for an comments
+
+        Returns:
+            Response -- Empty body with 204 status code
+        """
+        comment = Comments.objects.get(pk=pk)
+        comment.subject = request.data["subject"]
+        comment.created_on = request.data["created_on"]
+        comment.content = request.data["content"]
+        comment.posts = Posts.objects.get(pk=request.data["posts"])
+
+        # game = Game.objects.get(pk=request.data["gameId"])
+        # event.game = game
+        comment.save()
+        
+        return Response({}, status=status.HTTP_204_NO_CONTENT)
+                    
 
 class CommentsSerializer(serializers.ModelSerializer):
     """JSON serializer for comments
